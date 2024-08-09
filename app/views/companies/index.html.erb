@@ -1,0 +1,30 @@
+<div class="mt-5 mb-5">
+  <div class="card shadow">
+    <h1 class="text-center mb-4 mt-4">Search Companies</h1>
+    <div class="card-body">
+      <%= search_form_for @q, url: companies_path do |form| %>
+        <div class="input-group mb-5">
+          <%= form.text_field :name_cont, class: 'form-control form-control-lg', "aria-describedby" =>"button-addon2" %>
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+            <i class="bi-search"></i> Search
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <% @companies.each do |company| %>
+    <div class="col-lg-4">
+      <div class="card shadow mb-5">
+        <div class="card-body text-center">
+          <%= image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrq8mdQOGc0FwzK4t6d7dn6SdSaCJXbyGb0g&s" %>
+          <p class="lead fw-bold text-primary"><%= company.name %></p>
+          <p class="lead"><i class="bi-phone"></i> <%= company.contact %></p>
+          <%= link_to 'View Company', company, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

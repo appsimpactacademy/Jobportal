@@ -1,0 +1,43 @@
+<div class="card shadow">
+  <div class="card-body">
+    <%= form_with(model: [:company, job]) do |form| %>
+      <%= form.hidden_field :posted_by_id, value: current_user.id %>
+      <div class="form-group">
+        <%= form.label :title, class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.text_field :title, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description, class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.text_area :description, class: 'form-control', rows: 10 %>
+      </div>
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <%= form.label :job_type, class: 'mb-2 mt-3 fw-bold' %>
+          <%= form.select :job_type, options_for_select(Job::JOB_TYPE, selected: job.job_type), {}, { class: 'form-select' } %>
+        </div>
+        <div class="col-lg-6">
+          <%= form.label :job_location, class: 'mb-2 mt-3 fw-bold' %>
+          <%= form.select :job_location, options_for_select(Job::JOB_LOCATION, selected: job.job_location), {}, { class: 'form-select' } %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <%= form.label :applicable_for, class: 'mb-2 mt-3 fw-bold' %>
+          <%= form.select :applicable_for, options_for_select(Job::APPLICABLE_FOR, selected: job.applicable_for), {}, { class: 'form-select' } %>
+        </div>
+        <div class="col-lg-6">
+          <%= form.label :salary_range, class: 'mb-2 mt-3 fw-bold' %>
+          <%= form.select :salary_range, options_for_select(Job::SALARY_RANGE, selected: job.salary_range), {}, { class: 'form-select' } %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :total_positions, class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.number_field :total_positions, min: 1, class: 'form-control' %>
+      </div>
+      <div class="form-group mt-4 mb-5">
+        <%= form.submit 'Post Job', class: 'btn btn-primary btn-lg' %>
+        <%= link_to 'Back to List', company_jobs_path, class: 'btn btn-outline-primary btn-lg'  %>
+      </div>
+    <% end %>
+  </div>
+</div>

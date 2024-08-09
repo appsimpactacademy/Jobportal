@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  job: one
+  user: one
+  cover_letter: MyString
+  current_ctc: MyString
+  expected_ctc: MyString
+  contact_number: MyString
+
+two:
+  job: two
+  user: two
+  cover_letter: MyString
+  current_ctc: MyString
+  expected_ctc: MyString
+  contact_number: MyString

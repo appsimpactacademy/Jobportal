@@ -1,0 +1,36 @@
+<div class="card shadow">
+  <div class="card-body">
+    <h3 class="text-primary mb-2">Apply for <%= @job.title %></h3>
+    <%= form_with(model: job_application) do |form| %>
+      <%= form.hidden_field :job_id, value: @job.id %>
+      <div class="form-group">
+        <%= form.label :cover_letter, class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.text_area :cover_letter, class: 'form-control', rows: 10 %>
+      </div>
+      <div class="form-group">
+        <%= form.label 'Current CTC', class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.text_field :current_ctc, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label 'Expected CTC', class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.text_field :expected_ctc, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label 'Contact Number', class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.text_field :contact_number, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label 'When you will be able to join?', class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.select :estimated_joining_within, options_for_select(AppliedJob::JOINING_DURATION, selected: job_application.estimated_joining_within), {}, { class: 'form-select' } %>
+      </div>
+      <div class="form-group">
+        <%= form.label 'Serving Notice Period?', class: 'mb-2 mt-3 fw-bold' %>
+        <%= form.check_box :serving_notice_period %>
+      </div>
+      <div class="form-group mt-4 mb-5">
+        <%= form.submit 'Apply To Job', class: 'btn btn-primary btn-lg' %>
+        <%= link_to 'Not Now', request.referrer, class: 'btn btn-outline-primary btn-lg'  %>
+      </div>
+    <% end %>
+  </div>
+</div>

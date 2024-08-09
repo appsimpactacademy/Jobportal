@@ -1,0 +1,35 @@
+<div class="row mt-5">
+  <div class="col-lg-8 mx-auto">
+
+    <%= link_to "Post New Job", new_company_job_path, class: "btn btn-primary btn-lg mb-4 shadow" %>
+
+    <% @jobs.each do |job| %>
+      <div class="card shadow mb-3">
+        <div class="card-body">
+          <p class="lead fw-bold text-primary"><%= job.title %></p>
+          <div class="row">
+            <div class="col-lg-3">
+              <p class="fw-bold text-secondary my-1">Applicable for</p>
+              <small class=""><%= job.applicable_for %></small>
+            </div>
+            <div class="col-lg-3">
+              <p class="fw-bold text-secondary my-1">Salary Range</p>
+              <small class=""><%= job.salary_range %></small>
+            </div>
+            <div class="col-lg-3">
+              <p class="fw-bold text-secondary my-1">Total Positions</p>
+              <small class=""><%= job.total_positions %></small>
+            </div>
+            <div class="col-lg-3">
+              <p class="fw-bold text-secondary my-1">Posted On</p>
+              <small class=""><%= job.created_at.strftime("%d %b, %Y") %></small>
+            </div>
+            <div class="col-lg-6">
+              <%= link_to 'View job', job, class: 'btn btn-primary mt-3' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

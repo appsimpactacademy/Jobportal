@@ -1,0 +1,38 @@
+<% if @jobs.present? %>
+  <h1 class="text-center">Hey! We got total <%= pluralize(@jobs.count, "#{(params[:type] || '').titleize} Job") %> For You</h1>
+  <div class="row mt-5">
+    <div class="col-lg-8 mx-auto">
+      <% @jobs.each do |job| %>
+        <div class="card shadow mb-3">
+          <div class="card-body">
+            <p class="lead fw-bold text-primary"><%= job.title %></p>
+            <div class="row">
+              <div class="col-lg-3">
+                <p class="fw-bold text-secondary my-1">Applicable for</p>
+                <small class=""><%= job.applicable_for %></small>
+              </div>
+              <div class="col-lg-3">
+                <p class="fw-bold text-secondary my-1">Salary Range</p>
+                <small class=""><%= job.salary_range %></small>
+              </div>
+              <div class="col-lg-3">
+                <p class="fw-bold text-secondary my-1">Total Positions</p>
+                <small class=""><%= job.total_positions %></small>
+              </div>
+              <div class="col-lg-3">
+                <p class="fw-bold text-secondary my-1">Company</p>
+                <small class=""><%= link_to job.company.name, job.company %></small>
+              </div>
+              <div class="col-lg-6">
+                <%= link_to 'Apply to this job', new_applied_job_path(job_id: job.uuid), class: 'btn btn-primary' %>
+                <%= link_to 'View job', job, class: 'btn btn-primary' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <h1 class="text-center">Sorry! No <%= "#{(params[:type] || '').titleize} Jobs" %> at the moment</h1>
+<% end %>

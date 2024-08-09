@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-lg-8 mt-5">
+    <%= render 'form', job_application: @job_application %>
+  </div>
+  <div class="col-lg-4 mt-5">
+    <div class="card shadow">
+      <div class="card-body">
+        <h4 class="text-primary card-title">Company Details</h4>
+        <p class="lead fw-bold"><span class="text-secondary">Name: </span><%= @job.company.name %></p>
+        <p class="lead fw-bold"><span class="text-secondary"> Posted By: </span><%= @job.posted_by.name %></p>
+        <p class="lead fw-bold"><span class="text-secondary"> Company Address: </span><%= @job.company.address %></p>
+        <p class="lead fw-bold"><span class="text-secondary"> Contacts: </span><%= "#{@job.company.contact}, #{@job.posted_by.contact_number}" %></p>
+      </div>
+    </div>
+  </div>
+</div>
