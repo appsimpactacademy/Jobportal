@@ -24,11 +24,11 @@
         <% end %>
       </div>
       <div class="col-lg-4">
-        <%= link_to jobs_path(type: 'onsight') do %>
+        <%= link_to jobs_path(type: 'onsite') do %>
           <div class="card rounded-0 shadow">
             <div class="card-body text-center">
-              <h3 class="text-primary">Onsight Jobs</h3>
-              <p class="lead"><%= pluralize(Job.onsight_jobs.count, 'Job') %></p>
+              <h3 class="text-primary">Onsite Jobs</h3>
+              <p class="lead"><%= pluralize(Job.onsite_jobs.count, 'Job') %></p>
             </div>
           </div>
         <% end %>

@@ -13,7 +13,7 @@ class Job < ApplicationRecord
             :applicable_for, :salary_range, :total_positions, presence: true
 
   scope :remote_jobs, -> { where(job_location: 'Remote') }
-  scope :onsight_jobs, -> { where(job_location: 'Onsight') }
+  scope :onsite_jobs, -> { where(job_location: 'Onsite') }
 
   def posted_by
     User.where(role: 'employeer').find(posted_by_id)
