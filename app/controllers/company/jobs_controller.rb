@@ -14,7 +14,7 @@ class Company::JobsController < ApplicationController
     if @job.save
       redirect_to company_jobs_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
