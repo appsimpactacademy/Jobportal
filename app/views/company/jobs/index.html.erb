@@ -25,7 +25,7 @@
               <small class=""><%= job.created_at.strftime("%d %b, %Y") %></small>
             </div>
             <div class="col-lg-6">
-              <%= link_to 'View job', job, class: 'btn btn-primary mt-3' %>
+              <%= link_to 'View job', company_job_path(job), class: 'btn btn-primary mt-3' %>
             </div>
           </div>
         </div>
