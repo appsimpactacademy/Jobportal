@@ -5,39 +5,63 @@
       <div class="form-group">
         <%= form.label :title, class: 'mb-2 mt-3 fw-bold' %>
         <%= form.text_field :title, class: 'form-control' %>
+        <% job.errors.full_messages_for(:title).each do |message| %>
+          <p class="text-danger"><%= message %></p>
+        <% end %>
       </div>
       <div class="form-group">
         <%= form.label :description, class: 'mb-2 mt-3 fw-bold' %>
         <%= form.text_area :description, class: 'form-control', rows: 10 %>
+        <% job.errors.full_messages_for(:description).each do |message| %>
+          <p class="text-danger"><%= message %></p>
+        <% end %>
       </div>
       <div class="form-group row">
         <div class="col-lg-6">
           <%= form.label :job_type, class: 'mb-2 mt-3 fw-bold' %>
-          <%= form.select :job_type, options_for_select(Job::JOB_TYPE, selected: job.job_type), {}, { class: 'form-select' } %>
+          <%= form.select :job_type, options_for_select(Job::JOB_TYPE, selected: job.job_type), { prompt: 'Select job type' }, { class: 'form-select' } %>
+          <% job.errors.full_messages_for(:job_type).each do |message| %>
+            <p class="text-danger"><%= message %></p>
+          <% end %>
         </div>
         <div class="col-lg-6">
           <%= form.label :job_location, class: 'mb-2 mt-3 fw-bold' %>
-          <%= form.select :job_location, options_for_select(Job::JOB_LOCATION, selected: job.job_location), {}, { class: 'form-select' } %>
+          <%= form.select :job_location, options_for_select(Job::JOB_LOCATION, selected: job.job_location), { prompt: 'Select job location' }, { class: 'form-select' } %>
+          <% job.errors.full_messages_for(:job_location).each do |message| %>
+            <p class="text-danger"><%= message %></p>
+          <% end %>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-lg-6">
           <%= form.label :applicable_for, class: 'mb-2 mt-3 fw-bold' %>
-          <%= form.select :applicable_for, options_for_select(Job::APPLICABLE_FOR, selected: job.applicable_for), {}, { class: 'form-select' } %>
+          <%= form.select :applicable_for, options_for_select(Job::APPLICABLE_FOR, selected: job.applicable_for), { prompt: 'Select applicable for' }, { class: 'form-select' } %>
+          <% job.errors.full_messages_for(:applicable_for).each do |message| %>
+            <p class="text-danger"><%= message %></p>
+          <% end %>
         </div>
         <div class="col-lg-6">
           <%= form.label :salary_range, class: 'mb-2 mt-3 fw-bold' %>
-          <%= form.select :salary_range, options_for_select(Job::SALARY_RANGE, selected: job.salary_range), {}, { class: 'form-select' } %>
+          <%= form.select :salary_range, options_for_select(Job::SALARY_RANGE, selected: job.salary_range), { prompt: 'Select salary range' }, { class: 'form-select' } %>
+          <% job.errors.full_messages_for(:salary_range).each do |message| %>
+            <p class="text-danger"><%= message %></p>
+          <% end %>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-lg-6">
           <%= form.label :total_positions, class: 'mb-2 mt-3 fw-bold' %>
           <%= form.number_field :total_positions, min: 1, class: 'form-control' %>
+          <% job.errors.full_messages_for(:total_positions).each do |message| %>
+            <p class="text-danger"><%= message %></p>
+          <% end %>
         </div>
         <div class="col-lg-6">
           <%= form.label :status, class: 'mb-2 mt-3 fw-bold' %>
-          <%= form.select :status, options_for_select(Job::JOB_STATUS, selected: job.status), {}, { class: 'form-select' } %>
+          <%= form.select :status, options_for_select(Job::JOB_STATUS, selected: job.status), { prompt: 'Select status' }, { class: 'form-select' } %>
+          <% job.errors.full_messages_for(:status).each do |message| %>
+            <p class="text-danger"><%= message %></p>
+          <% end %>
         </div>
       </div>
       <div class="form-group mt-4 mb-5">
