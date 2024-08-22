@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-lg-9">
+    <h2 class="text-primary mt-4 mb-5"><%= @job.title %></h2>
+    <p class="lead text-secondary"><%= @job.description %></p>
+    <p class="lead text-secondary fw-bold">Total Positions: <%= @job.total_positions %></p>
+    <p class="lead text-secondary fw-bold">Who can Apply: <%= @job.applicable_for %></p>
+    <p class="lead text-secondary fw-bold">Salary Range: <%= @job.salary_range %></p>
+    <p class="lead text-secondary fw-bold">Job Type: <%= @job.job_type %></p>
+    <p class="lead text-secondary fw-bold">Location: <%= @job.job_location %></p>
+    <% if request.referrer.present? %>
+      <%= link_to 'Back to list', request.referrer, class: 'btn btn-primary' %>
+    <% else %>
+      <%= link_to 'Back to list', company_jobs_path, class: 'btn btn-primary' %>
+    <% end %>
+    <%= link_to 'View as Job Seeker', @job, class: 'btn btn-outline-primary', target: :_blank %>
+  </div>
+  <div class="col-lg-3">
+  </div>
+</div>
+  
