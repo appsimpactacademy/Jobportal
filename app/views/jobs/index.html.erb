@@ -1,5 +1,22 @@
 <% if @jobs.present? %>
   <h1 class="text-center">Hey! We got total <%= pluralize(@jobs.count, "#{(params[:type] || '').titleize} Job") %> For You</h1>
+
+  <div class="mt-5 mb-5">
+    <div class="card shadow">
+      <h1 class="text-center mb-4 mt-4">Search Jobs</h1>
+      <div class="card-body">
+        <%= search_form_for @q, url: jobs_path do |form| %>
+          <div class="input-group mb-5">
+            <%= form.text_field :title_or_job_type_or_company_name_cont, class: 'form-control form-control-lg', "aria-describedby" =>"button-addon2", placeholder: 'Search jobs via title, company or job type' %>
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+              <i class="bi-search"></i> Search
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
   <div class="row mt-5">
     <div class="col-lg-8 mx-auto">
       <% @jobs.each do |job| %>
