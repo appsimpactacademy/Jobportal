@@ -18,9 +18,9 @@ class Job < ApplicationRecord
   scope :remote_jobs, -> { where(job_location: 'Remote') }
   scope :onsite_jobs, -> { where(job_location: 'Onsite') }
 
-  scope :active_jobs, -> { where(status: 'Active') }
-  scope :inactive_jobs, -> { where(status: 'Inactive') }
-  scope :draft_jobs, -> { where(status: 'Draft') }
+  scope :active_jobs, -> { includes(:company).where(status: 'Active') }
+  scope :inactive_jobs, -> { includes(:company).where(status: 'Inactive') }
+  scope :draft_jobs, -> { includes(:company).where(status: 'Draft') }
 
   def posted_by
     User.where(role: 'employeer').find(posted_by_id)
