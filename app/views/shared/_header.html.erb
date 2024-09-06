@@ -15,6 +15,13 @@
         <li class="nav-item">
           <a class="nav-link active" href="/jobs?type=onsite">Onsite Jobs</a>
         </li>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to sign out from app?' }, class: "nav-link active" %>
+          <% else %>
+            <%= link_to 'Sign In', new_user_session_path, class: "nav-link active" %>
+          <% end %>
+        </li>
       </ul>
     </div>
   </div>

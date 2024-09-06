@@ -1,5 +1,6 @@
 class Company::JobsController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_company_user
   before_action :load_job, only: %i[show edit destroy update]
 
   def index

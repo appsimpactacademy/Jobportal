@@ -6,6 +6,9 @@ class User < ApplicationRecord
   
   belongs_to :company, optional: true
 
+  validates :first_name, :last_name, presence: true
+  validates :contact_number, presence: true, uniqueness: true
+
   validate :company_required_if_employeer
 
   def employeer?
