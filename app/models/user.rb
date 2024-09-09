@@ -6,6 +6,9 @@ class User < ApplicationRecord
   
   belongs_to :company, optional: true
 
+  has_many :user_saved_jobs
+  has_many :jobs, through: :user_saved_jobs
+
   validates :first_name, :last_name, presence: true
   validates :contact_number, presence: true, uniqueness: true
 

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :jobs, only: [:index, :show]
   resources :companies, only: [:index, :show]
   resources :applied_jobs
+  resources :user_saved_jobs
 
   namespace :company do 
     resources :jobs
