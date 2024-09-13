@@ -1,0 +1,31 @@
+<h1>Hello <%= current_user.name %></h1>
+
+<div class="row">
+  <div class="col-lg-8">
+    <% if @saved_jobs.present? %>
+      <h3 class="mb-4">My Saved Jobs</h3>
+      <% @saved_jobs.each do |saved_job| %>
+        <div class="card mb-4">
+          <div class="card-body">
+            <p class="lead fw-bold text-secondary"><%= saved_job.job.title %></p>
+            <%= link_to 'View Job', job_path(saved_job.job.uuid), class: "btn btn-primary" %>
+            <%= link_to 'Remove from Saved Job', user_saved_job_path(saved_job), class: "btn btn-danger", data: { turbo_method: :patch, turbo_confirm: 'Are you sure you want to remove this job from your saved list?' } %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if @removed_saved_jobs.present? %>
+      <h3 class="mb-4">Saved but removed from the list</h3>
+      <% @removed_saved_jobs.each do |saved_job| %>
+        <div class="card mb-4">
+          <div class="card-body">
+            <p class="lead fw-bold text-secondary"><%= saved_job.job.title %></p>
+            <%= link_to 'View Job', job_path(saved_job.job.uuid), class: "btn btn-primary" %>
+            <%= link_to 'Add to Saved Job', user_saved_job_path(saved_job, add_to_saved_list: true), class: "btn btn-success", data: { turbo_method: :patch } %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
