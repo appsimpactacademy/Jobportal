@@ -1,5 +1,7 @@
 class NotificationSettingsController < ApplicationController
-  def manage_notification_setting
+  before_action :authenticate_user!
+
+  def manage_notification_settings
     if current_user.notification_setting.present?
       @setting = current_user.notification_setting
     else
