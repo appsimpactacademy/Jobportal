@@ -18,6 +18,15 @@ class NotificationSettingsController < ApplicationController
     end
   end
 
+  def update
+    @setting = current_user.notification_setting
+    if @setting.update(setting_params)
+      redirect_to settings_path
+    else
+      render :manage_notification_settings, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def setting_params
