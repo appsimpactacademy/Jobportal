@@ -14,6 +14,17 @@ class Company::JobsController < ApplicationController
   def create
     @job = current_company.jobs.new(job_params)
     if @job.save
+      # find all the users with notification setting present and selected the option for receive the notification when new job posted
+      users = User.where(role: 'job_seeker')
+                  .includes(:notification_setting)
+                  .map {| user | user if user.notification_setting.present? && user.notification_setting.on_new_job_post }
+                  .compact
+      if users.present?
+        users.each do |user|
+          # send email to users one by one
+          NotificationMailer.when_new_job_created(user, @job).deliver_now
+        end
+      end
       redirect_to company_jobs_path
     else
       render :new, status: :unprocessable_entity

@@ -74,3 +74,4 @@ gem 'devise'
 gem 'cssbundling-rails'
 gem 'ransack'
 gem 'faker'
+gem "letter_opener", group: :development
