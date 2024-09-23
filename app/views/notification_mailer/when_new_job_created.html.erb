@@ -1,5 +1,10 @@
-<h1>Hello <%= @user.name %></h1>
+<h1>Hello <%#= @user.name %></h1>
 
 <p>
-  A new job posted: <%= @job.title %>
+  A new job posted: <%= @job.title %> by <strong><%= link_to @job.company.name, company_url(@job.company) %></strong>
 </p>
+
+<p>Please checkout the job details here: <%= link_to "Here", job_url(@job.uuid), target: '_blank' %></p>
+
+<p>Thanks</p>
+<p>JobPortal</p>
