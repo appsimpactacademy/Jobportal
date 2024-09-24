@@ -1,4 +1,4 @@
-<h1>Hello <%#= @user.name %></h1>
+<h1>Hello <%= @user.name %></h1>
 
 <p>
   A new job posted: <%= @job.title %> by <strong><%= link_to @job.company.name, company_url(@job.company) %></strong>

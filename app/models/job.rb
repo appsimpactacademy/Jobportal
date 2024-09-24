@@ -39,6 +39,10 @@ class Job < ApplicationRecord
     uuid
   end
 
+  def active?
+    self.status == 'Active'
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     ["applicable_for", "company_id", "created_at", "description", "id", "job_location", "job_type", "link_to_apply", "posted_by_id", "salary_range", "status", "title", "total_positions", "updated_at", "uuid"]
   end

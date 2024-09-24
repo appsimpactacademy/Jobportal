@@ -15,12 +15,14 @@ class Company::JobsController < ApplicationController
     @job = current_company.jobs.new(job_params)
     if @job.save
       # find all the users with notification setting present and selected the option for receive the notification when new job posted
-      users = User.joins(:notification_setting)
-                  .where(notification_settings: { on_new_job_post: true })
-      if users.present?
-        users.each do |user|
-          # send email to users one by one
-          NotificationMailer.when_new_job_created(user, @job).deliver_now
+      if @job.active?
+        users = User.joins(:notification_setting)
+                    .where(notification_settings: { on_new_job_post: true })
+        if users.present?
+          users.each do |user|
+            # send email to users one by one
+            NotificationMailer.when_new_job_created(user, @job).deliver_now
+          end
         end
       end
       redirect_to company_jobs_path
