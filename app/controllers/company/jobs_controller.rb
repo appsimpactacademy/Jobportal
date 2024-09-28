@@ -46,7 +46,21 @@ class Company::JobsController < ApplicationController
   end
 
   def destroy
+    if @job.user_saved_jobs.present?
+      users = @job.job_seekers
+                  .joins(:notification_setting)
+                  .where(notification_settings: { on_removal_of_favourite_job: true })
+                  .to_a
+      job_title = @job.title
+      company = @job.company
+    end
+    notifiable_users = users.dup
     @job.destroy
+    if notifiable_users.present?
+      notifiable_users.each do |user|
+        NotificationMailer.when_a_user_favourite_job_removed(user, job_title, company).deliver_now
+      end
+    end
     redirect_to company_jobs_path
   end
 

@@ -1,0 +1,18 @@
+<h1>Hello <%= @user.name %></h1>
+
+<p>
+  A job with title <strong><%= @title %></strong> that you have added to your favourite job list has been removed from the portal by <strong><%= @company.name %></strong>.
+</p>
+
+<% if @company.jobs.active_jobs.count > 0 %>
+  <p>
+    There are still some active jobs present at  <strong><%= @company.name %></strong>. You can checkout those jobs <%= link_to 'Here', company_url(@company) %>
+  </p>
+<% end %>
+
+<p>
+  Click <%= link_to 'Here', my_saved_jobs_user_saved_jobs_url %> to see your favourite job list.
+</p>
+
+<p>Thanks</p>
+<p>JobPortal</p>

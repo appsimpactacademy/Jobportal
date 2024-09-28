@@ -7,8 +7,8 @@ class Job < ApplicationRecord
   JOB_STATUS = ['Active', 'Inactive', 'Draft']
 
   has_many :applied_jobs
-  has_many :user_saved_jobs
-  has_many :users, through: :user_saved_jobs
+  has_many :user_saved_jobs, dependent: :destroy
+  has_many :job_seekers, class_name: 'User', through: :user_saved_jobs
 
   belongs_to :company
   
