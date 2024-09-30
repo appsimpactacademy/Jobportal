@@ -4,7 +4,7 @@ class Job < ApplicationRecord
   JOB_LOCATION = ['Remote', 'Onsite']
   APPLICABLE_FOR = ['Freshers', 'Intermediate', 'Experienced', 'Expert', 'Open for all']
   SALARY_RANGE = ['$1000-$2500', '$2500-$5000', '$5000-$10000', '> $10000', 'Hourly']
-  JOB_STATUS = ['Active', 'Inactive', 'Draft']
+  JOB_STATUS = ['Active', 'Inactive', 'Draft', 'Closed']
 
   has_many :applied_jobs
   has_many :user_saved_jobs, dependent: :destroy
@@ -41,6 +41,10 @@ class Job < ApplicationRecord
 
   def active?
     self.status == 'Active'
+  end
+
+  def inactive_for_job_seekers?
+    self.status != 'Active'
   end
 
   def self.ransackable_attributes(auth_object = nil)

@@ -39,6 +39,17 @@ class Company::JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
+      if @job.inactive_for_job_seekers?
+        users = @job.applied_jobs
+                    .joins(job_seeker: :notification_setting)
+                    .where(notification_settings: { on_status_changed_on_applied_job: true })
+                    .map(&:job_seeker)
+        if users.present?
+          users.each do |user|
+            NotificationMailer.when_an_applied_job_status_changed(user, @job).deliver_now
+          end
+        end
+      end
       redirect_to company_jobs_path
     else
       render :edit, status: :unprocessable_entity

@@ -1,7 +1,7 @@
 <h1>Hello <%= current_user.name %></h1>
 
 <div class="row">
-  <div class="col-lg-8">
+  <div class="col-lg-6">
     <% if @saved_jobs.present? %>
       <h3 class="mb-4">My Saved Jobs</h3>
       <% @saved_jobs.each do |saved_job| %>
@@ -23,6 +23,23 @@
             <p class="lead fw-bold text-secondary"><%= saved_job.job.title %></p>
             <%= link_to 'View Job', job_path(saved_job.job.uuid), class: "btn btn-primary" %>
             <%= link_to 'Add to Saved Job', user_saved_job_path(saved_job, add_to_saved_list: true), class: "btn btn-success", data: { turbo_method: :patch } %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-lg-6">
+    <% if @applied_jobs.present? %>
+      <h3 class="mb-4">My Applied Jobs</h3>
+      <% @applied_jobs.each do |applied_job| %>
+        <div class="card mb-4">
+          <div class="card-body">
+            <p class="lead fw-bold text-secondary"><%= applied_job.job.title %></p>
+            <% if applied_job.job.active? %>
+              <%= link_to 'View Job', job_path(applied_job.job.uuid), class: "btn btn-primary" %>
+            <% else %>
+              <%= link_to 'Inactive Job', 'javascript:void(0)', class: "btn btn-secondary" %>
+            <% end %>
           </div>
         </div>
       <% end %>
