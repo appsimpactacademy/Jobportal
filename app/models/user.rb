@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_many :user_saved_jobs
   has_many :jobs, through: :user_saved_jobs
-
+  has_many :applied_jobs
   has_one :notification_setting
 
   validates :first_name, :last_name, presence: true

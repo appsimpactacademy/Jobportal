@@ -1,0 +1,8 @@
+<h1>Hello <%= @user.name %></h1>
+
+<p>
+  A job that you have applied on: <%= @job.title %> by <strong><%= link_to @job.company.name, company_url(@job.company) %></strong> is no longer available. It is set to be inactive for public users.
+</p>
+
+<p>Thanks</p>
+<p>JobPortal</p>

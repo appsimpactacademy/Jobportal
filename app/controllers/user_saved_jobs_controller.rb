@@ -24,5 +24,6 @@ class UserSavedJobsController < ApplicationController
   def my_saved_jobs
     @saved_jobs = current_user.user_saved_jobs.includes(:job).where(removed_from_favourite_at: nil)
     @removed_saved_jobs = current_user.user_saved_jobs.includes(:job).where.not(removed_from_favourite_at: nil)
+    @applied_jobs = current_user.applied_jobs
   end
 end

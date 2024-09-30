@@ -14,4 +14,11 @@ class NotificationMailer < ApplicationMailer
 
     mail(to: @user.email, subject: "Removal of #{job_title} from the portal")
   end
+
+  def when_an_applied_job_status_changed(user, job)
+    @user = user
+    @job = job
+
+    mail(to: @user.email, subject: "Job Status changed on: #{@job.title}")
+  end
 end
