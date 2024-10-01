@@ -21,4 +21,19 @@ class NotificationMailer < ApplicationMailer
 
     mail(to: @user.email, subject: "Job Status changed on: #{@job.title}")
   end
+
+  def job_application_receive_to_employeer(user, job)
+    @user = user
+    @job = job
+    @employeer = @job.posted_by
+
+    mail(to: @user.email, subject: "New application received on job: #{@job.title}")
+  end
+
+  def job_applied_by_job_seeker(user, job)
+    @user = user
+    @job = job
+
+    mail(to: @user.email, subject: "Thanks for applying for: #{@job.title}")
+  end
 end

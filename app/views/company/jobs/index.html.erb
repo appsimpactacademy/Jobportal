@@ -28,7 +28,11 @@
               <%= link_to 'View job', company_job_path(job), class: 'btn btn-primary mt-3' %>
               <%= link_to 'Edit job', edit_company_job_path(job), class: 'btn btn-info mt-3' %>
               <%= link_to 'Delete job', company_job_path(job), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this job? This action can not be undo.' }, class: 'btn btn-danger mt-3' %>
-              <%= link_to 'View as Job Seeker', job, class: 'btn btn-outline-primary mt-3', target: :_blank %>
+              <% if job.inactive_for_job_seekers? %>
+                <%= link_to 'Not active for job seekers', "javascript:void(0)", class: 'btn btn-outline-danger mt-3' %>
+              <% else %>
+                <%= link_to 'View as Job Seeker', job, class: 'btn btn-outline-primary mt-3', target: :_blank %>
+              <% end %>
             </div>
           </div>
         </div>

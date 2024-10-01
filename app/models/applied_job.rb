@@ -5,4 +5,15 @@ class AppliedJob < ApplicationRecord
   belongs_to :job_seeker, class_name: 'User', foreign_key: 'user_id'
 
   validates :cover_letter, :expected_ctc, :current_ctc, :contact_number, presence: true
+
+  # callbacks
+
+  after_create :notify_employeers_and_job_seekers
+
+  private
+
+  def notify_employeers_and_job_seekers
+    NotificationMailer.job_application_receive_to_employeer(job_seeker, job).deliver_now
+    NotificationMailer.job_applied_by_job_seeker(job_seeker, job).deliver_now
+  end
 end

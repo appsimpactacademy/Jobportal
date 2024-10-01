@@ -29,8 +29,11 @@ class Job < ApplicationRecord
     User.where(role: 'employeer').find(posted_by_id)
   end
 
+  # callbacks
   before_create :generate_uuid
-
+  after_create :notify_job_seekers_on_new_job_post, if: :active?
+  after_update :notify_job_seekers_on_status_changed_for_applied_job, if: :inactive_for_job_seekers?
+  
   def generate_uuid
     self.uuid = SecureRandom.uuid
   end
@@ -53,5 +56,28 @@ class Job < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["applied_jobs", "company"]
+  end
+
+  private
+
+  def notify_job_seekers_on_new_job_post
+    users = User.where(role: 'job_seeker')
+                .joins(:notification_setting)
+                .where(notification_settings: { on_new_job_post: true })
+    users.each do |user|
+      NotificationMailer.when_new_job_created(user, self).deliver_now
+    end if users.present?
+  end
+
+  def notifiable_users
+    applied_jobs.joins(job_seeker: :notification_setting)
+                .where(notification_settings: { on_status_changed_on_applied_job: true })
+                .map(&:job_seeker)
+  end
+
+  def notify_job_seekers_on_status_changed_for_applied_job
+    notifiable_users.each do |user|
+      NotificationMailer.when_an_applied_job_status_changed(user, self).deliver_now
+    end if notifiable_users.present?
   end
 end
