@@ -14,17 +14,6 @@ class Company::JobsController < ApplicationController
   def create
     @job = current_company.jobs.new(job_params)
     if @job.save
-      # find all the users with notification setting present and selected the option for receive the notification when new job posted
-      if @job.active?
-        users = User.joins(:notification_setting)
-                    .where(notification_settings: { on_new_job_post: true })
-        if users.present?
-          users.each do |user|
-            # send email to users one by one
-            NotificationMailer.when_new_job_created(user, @job).deliver_now
-          end
-        end
-      end
       redirect_to company_jobs_path
     else
       render :new, status: :unprocessable_entity
@@ -39,17 +28,6 @@ class Company::JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      if @job.inactive_for_job_seekers?
-        users = @job.applied_jobs
-                    .joins(job_seeker: :notification_setting)
-                    .where(notification_settings: { on_status_changed_on_applied_job: true })
-                    .map(&:job_seeker)
-        if users.present?
-          users.each do |user|
-            NotificationMailer.when_an_applied_job_status_changed(user, @job).deliver_now
-          end
-        end
-      end
       redirect_to company_jobs_path
     else
       render :edit, status: :unprocessable_entity

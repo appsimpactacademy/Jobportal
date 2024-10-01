@@ -25,10 +25,22 @@
             <div class="col-lg-6 mt-3 mb-2">
               <%= link_to 'Apply to this job', new_applied_job_path(job_id: job.uuid), class: 'btn btn-primary' %>
               <%= link_to 'View job', job, class: 'btn btn-primary' %>
+              <% if user_signed_in? && current_user.job_seeker? %>
+                <% if current_user.jobs.include?(job) %>
+                  <span class="badge text-bg-primary">Saved Job</span>
+                <% else %>
+                  <%= link_to 'Save Job', user_saved_jobs_path(job_id: job.uuid), class: "btn btn-outline-danger", data: { turbo_method: :post } %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     <% end %>
+  <% else %>
+    <div class="text-center">
+      <h1 class="mt-5 mb-5">No Open Jobs Found</h1>
+      <%= link_to 'Find More Jobs At Other Companies', jobs_path, class: 'btn btn-primary' %>
+    </div>
   <% end %>
 </div>
