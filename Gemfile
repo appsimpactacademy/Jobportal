@@ -75,3 +75,4 @@ gem 'cssbundling-rails'
 gem 'ransack'
 gem 'faker'
 gem "letter_opener", group: :development
+gem 'delayed_job_active_record'
