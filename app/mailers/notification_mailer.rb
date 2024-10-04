@@ -27,7 +27,7 @@ class NotificationMailer < ApplicationMailer
     @job = job
     @employeer = @job.posted_by
 
-    mail(to: @user.email, subject: "New application received on job: #{@job.title}")
+    mail(to: @employeer.email, subject: "New application received on job: #{@job.title}")
   end
 
   def job_applied_by_job_seeker(user, job)

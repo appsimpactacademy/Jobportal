@@ -13,6 +13,36 @@
       <%= link_to 'Back to list', company_jobs_path, class: 'btn btn-primary' %>
     <% end %>
     <%= link_to 'View as Job Seeker', @job, class: 'btn btn-outline-primary', target: :_blank %>
+
+    <% if @applied_jobs.present? %>
+      <h2 class="text-secondary mt-4 mb-4"><%= @applied_jobs.count %> Job applications received!</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Applied By</th>
+            <th>Email</th>
+            <th>Expected CTC</th>
+            <th>Current CTC</th>
+            <th>Able to join within</th>
+            <th>Notice Period</th>
+            <th>Applied On</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @applied_jobs.each do |applied_job| %>
+            <tr>
+              <td><%= applied_job.job_seeker.name %></td>
+              <td><%= applied_job.job_seeker.email %></td>
+              <td><%= applied_job.expected_ctc %></td>
+              <td><%= applied_job.current_ctc %></td>
+              <td><%= applied_job.estimated_joining_within %></td>
+              <td><%= applied_job.serving_notice_period ? 'Yes' : 'No' %></td>
+              <td><%= applied_job.created_at.strftime("%Y-%m-%d") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
   <div class="col-lg-3">
   </div>

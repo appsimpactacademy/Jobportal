@@ -21,6 +21,7 @@ class Company::JobsController < ApplicationController
   end
 
   def show
+    @applied_jobs = @job.applied_jobs.includes(:job_seeker)
   end
 
   def edit
@@ -46,9 +47,7 @@ class Company::JobsController < ApplicationController
     notifiable_users = users.dup
     @job.destroy
     if notifiable_users.present?
-      notifiable_users.each do |user|
-        NotificationMailer.when_a_user_favourite_job_removed(user, job_title, company).deliver_now
-      end
+      DeleteFavouriteJobNotificationJob.perform_later(notifiable_users, job_title, company)
     end
     redirect_to company_jobs_path
   end
