@@ -16,6 +16,24 @@
 
     <% if @applied_jobs.present? %>
       <h2 class="text-secondary mt-4 mb-4"><%= @applied_jobs.count %> Job applications received!</h2>
+
+      <div class="mt-4 mb-4">
+        <%= form_with url: company_job_path(@job), method: :get, local: true do |form| %>
+          <div class="form-group row mb-5">
+            <div class="col-lg-4">
+              <%= form.select :joining_duration, options_for_select(AppliedJob::JOINING_DURATION, selected: params[:joining_duration]), { prompt: 'Select Joining Period' }, { class: 'form-select' } %>
+            </div>
+            <div class="col-lg-4">
+              <%= form.select :serving_notice, options_for_select([['Yes', true], ['No', false]], selected: params[:serving_notice]), { prompt: 'Serving Notice Period' }, { class: 'form-select' } %>
+            </div>
+            <div class="col-lg-4">
+              <%= form.submit 'Filter Applications', class: "btn btn-primary" %>
+              <%= link_to 'Reset', company_job_path(@job), class: 'btn btn-outline-primary' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
       <table class="table table-bordered">
         <thead>
           <tr>

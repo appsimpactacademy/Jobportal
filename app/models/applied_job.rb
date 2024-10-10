@@ -10,6 +10,16 @@ class AppliedJob < ApplicationRecord
 
   after_create :notify_employeers_and_job_seekers
 
+  # class methods
+
+  def self.filter_applications(params)
+    if params[:joining_duration].present? && params[:serving_notice].present?
+      where(estimated_joining_within: params[:joining_duration], serving_notice_period: params[:serving_notice])
+    else
+      all
+    end
+  end
+
   private
 
   def notify_employeers_and_job_seekers
