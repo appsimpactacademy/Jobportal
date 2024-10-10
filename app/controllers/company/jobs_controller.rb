@@ -21,7 +21,9 @@ class Company::JobsController < ApplicationController
   end
 
   def show
-    @applied_jobs = @job.applied_jobs.includes(:job_seeker)
+    @applied_jobs = @job.applied_jobs
+                        .includes(:job_seeker)
+                        .filter_applications(search_params)
   end
 
   def edit
@@ -56,6 +58,10 @@ class Company::JobsController < ApplicationController
 
   def load_job
     @job = current_company.jobs.find_by(uuid: params[:id])
+  end
+
+  def search_params
+    { joining_duration: params[:joining_duration], serving_notice: params[:serving_notice] }
   end
 
   def job_params
