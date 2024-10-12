@@ -32,6 +32,9 @@
             </div>
           </div>
         <% end %>
+
+        <%= link_to 'Export as CSV', company_job_path(@job, format: 'csv'), class: 'btn btn-secondary' %>
+        <%= link_to 'Export as Excel', company_job_path(@job, format: 'xls'), class: 'btn btn-secondary' %>
       </div>
 
       <table class="table table-bordered">
