@@ -24,6 +24,17 @@ class Company::JobsController < ApplicationController
     @applied_jobs = @job.applied_jobs
                         .includes(:job_seeker)
                         .filter_applications(search_params)
+    respond_to do |format|
+      format.html
+      format.csv do 
+        csv_data = Csv::ExportJobApplicationsService.new(@applied_jobs).generate_csv
+        send_data csv_data, filename: "job-applications-#{Date.today}.csv"
+      end
+      format.xls do
+        excel_data = Excel::ExportJobApplicationsService.new(@applied_jobs, @job).generate_excel
+        send_data excel_data, filename: "job-applications-#{Date.today}.xls"
+      end
+    end
   end
 
   def edit
