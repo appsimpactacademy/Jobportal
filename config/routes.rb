@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   resources :notification_settings, only: %i[create update]
 
   namespace :company do 
-    resources :jobs
+    resources :jobs do
+      member do
+        post :export_job_applications
+      end
+    end
     resources :applied_jobs
   end
 end
