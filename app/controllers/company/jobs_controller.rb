@@ -14,7 +14,7 @@ class Company::JobsController < ApplicationController
   def create
     @job = current_company.jobs.new(job_params)
     if @job.save
-      redirect_to company_jobs_path
+      redirect_to company_jobs_path, notice: 'Job created successfully'
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,7 +42,7 @@ class Company::JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      redirect_to company_jobs_path
+      redirect_to company_jobs_path, notice: 'Job updated successfully'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -62,7 +62,7 @@ class Company::JobsController < ApplicationController
     if notifiable_users.present?
       DeleteFavouriteJobNotificationJob.perform_later(notifiable_users, job_title, company)
     end
-    redirect_to company_jobs_path
+    redirect_to company_jobs_path, alert: 'Job deleted successfully'
   end
 
   private
