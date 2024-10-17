@@ -1,7 +1,7 @@
 class Company::JobsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_company_user
-  before_action :load_job, only: %i[show edit destroy update]
+  before_action :load_job, only: %i[show edit destroy update export_job_applications]
 
   def index
     @jobs = current_company.jobs
@@ -24,17 +24,6 @@ class Company::JobsController < ApplicationController
     @applied_jobs = @job.applied_jobs
                         .includes(:job_seeker)
                         .filter_applications(search_params)
-    respond_to do |format|
-      format.html
-      format.csv do 
-        csv_data = Csv::ExportJobApplicationsService.new(@applied_jobs).generate_csv
-        send_data csv_data, filename: "job-applications-#{Date.today}.csv"
-      end
-      format.xls do
-        excel_data = Excel::ExportJobApplicationsService.new(@applied_jobs, @job).generate_excel
-        send_data excel_data, filename: "job-applications-#{Date.today}.xls"
-      end
-    end
   end
 
   def edit
@@ -63,6 +52,13 @@ class Company::JobsController < ApplicationController
       DeleteFavouriteJobNotificationJob.perform_later(notifiable_users, job_title, company)
     end
     redirect_to company_jobs_path, alert: 'Job deleted successfully'
+  end
+
+  def export_job_applications
+    ExportJobApplicationsJob.perform_later(current_user, @job, search_params, params[:as])
+    respond_to do |format|
+      format.html { redirect_to company_job_path(@job, joining_duration: params[:joining_duration], serving_notice: params[:serving_notice], commit: params[:commit]), notice: "#{params[:as].upcase} is being generated and this will be send to your email." }
+    end
   end
 
   private

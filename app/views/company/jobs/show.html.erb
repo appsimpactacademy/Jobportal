@@ -33,8 +33,8 @@
           </div>
         <% end %>
 
-        <%= link_to 'Export as CSV', company_job_path(@job, joining_duration: params[:joining_duration], serving_notice: params[:serving_notice], commit: params[:commit], format: 'csv'), class: 'btn btn-secondary' %>
-        <%= link_to 'Export as Excel', company_job_path(@job, joining_duration: params[:joining_duration], serving_notice: params[:serving_notice], commit: params[:commit], format: 'xls'), class: 'btn btn-secondary' %>
+        <%= button_to 'Export as CSV', export_job_applications_company_job_path(@job, joining_duration: params[:joining_duration], serving_notice: params[:serving_notice], commit: params[:commit], as: 'csv'), class: 'btn btn-secondary' %>
+        <%= button_to 'Export as Excel', export_job_applications_company_job_path(@job, joining_duration: params[:joining_duration], serving_notice: params[:serving_notice], commit: params[:commit], as: 'xls'), class: 'btn btn-secondary' %>
       </div>
 
       <table class="table table-bordered">
