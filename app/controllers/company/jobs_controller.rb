@@ -4,7 +4,7 @@ class Company::JobsController < ApplicationController
   before_action :load_job, only: %i[show edit destroy update export_job_applications]
 
   def index
-    @jobs = current_company.jobs
+    @jobs = current_company.jobs.includes(:applied_jobs)
   end
 
   def new

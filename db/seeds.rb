@@ -11,7 +11,10 @@
   company = Company.create(
     name: Faker::Company.name, 
     address: Faker::Address.full_address,
-    contact: Faker::PhoneNumber.phone_number_with_country_code
+    contact: Faker::PhoneNumber.phone_number_with_country_code,
+    domain: ['IT and Software Engineering', 'Accounting', 'Networking', 'Ecommerce', 'Textiles', 'Science & Engineering'].sample,
+    about: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    website: "https://www.example#{i+1}.com"
   )
 
   puts "Creating employeer #{i+1}"

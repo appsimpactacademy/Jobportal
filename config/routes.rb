@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :notification_settings, only: %i[create update]
 
   namespace :company do 
+    get 'my-company' => "settings#company_details"
+    patch 'update_company_info' => "settings#update_company_info"
     resources :jobs do
       member do
         post :export_job_applications

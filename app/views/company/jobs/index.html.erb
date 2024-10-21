@@ -1,12 +1,10 @@
 <div class="row mt-5">
-  <div class="col-lg-8 mx-auto">
-
-    <%= link_to "Post New Job", new_company_job_path, class: "btn btn-primary btn-lg mb-4 shadow" %>
-
+  <div class="col-lg-12">
     <% @jobs.each do |job| %>
       <div class="card shadow mb-3">
         <div class="card-body">
           <p class="lead fw-bold text-primary"><%= job.title %></p>
+          <p><span class="badge bg-primary"><%= pluralize(job.applied_jobs.count, "job application") %> received</span></p>
           <div class="row">
             <div class="col-lg-3">
               <p class="fw-bold text-secondary my-1">Applicable for</p>

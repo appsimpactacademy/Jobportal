@@ -2,6 +2,8 @@
   <h1 class="text-primary"><%= @company.name %></h1>
   <p class="lead fw-bold text-secondary"><i class="bi-pin-map-fill"></i> <%= @company.address %></p>
   <p class="lead fw-bold text-secondary"><i class="bi-phone"></i> <%= @company.contact %></p>
+  <p class="lead fw-bold text-secondary"><i class="bi-building"></i> <%= @company.domain %></p>
+  <p class="lead fw-bold text-secondary"><i class="bi-globe"></i> <%= link_to @company.website, @company.website, target: "_blank" %></p>
   <hr>
   <% if @jobs.present? %>
     <h4 class="text-secondary mt-4 mb-4">Open jobs at <%= @company.name %></h4>
