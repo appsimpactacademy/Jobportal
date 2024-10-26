@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
   }
   root 'home#index'
+  get 'register' => 'home#sign_up_options'
   resources :jobs, only: [:index, :show]
   resources :companies, only: [:index, :show]
   resources :applied_jobs
