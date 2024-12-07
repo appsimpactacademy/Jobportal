@@ -26,7 +26,7 @@ class Job < ApplicationRecord
   scope :draft_jobs, -> { includes(:company).where(status: 'Draft') }
 
   def posted_by
-    User.where(role: 'employeer').find(posted_by_id)
+    User.where(role: 'employer').find(posted_by_id)
   end
 
   # callbacks

@@ -25,10 +25,10 @@
               <small class=""><%= job.total_positions %></small>
             </div>
             <div class="col-lg-6 mt-3 mb-2">
-              <% unless user_signed_in? && current_user.employeer? %>
+              <% unless user_signed_in? && current_user.employer? %>
                 <%= link_to 'Apply to this job', new_applied_job_path(job_id: job.uuid), class: 'btn btn-primary' %>
               <% end %>
-              <% if user_signed_in? && current_user.employeer? %>
+              <% if user_signed_in? && current_user.employer? %>
                 <%= link_to 'View job', job_path(job, public_view: 'yes'), class: 'btn btn-primary' %>
               <% else %>
                 <%= link_to 'View job', job, class: 'btn btn-primary' %>

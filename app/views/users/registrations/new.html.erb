@@ -7,7 +7,7 @@
           <%= render "users/shared/error_messages", resource: resource %>
 
           <% if params[:type].present? && params[:type] == 'hire' %>
-            <%= f.hidden_field :role, value: 'employeer' %>
+            <%= f.hidden_field :role, value: 'employer' %>
             <div class="form-group mb-3">
               <%= f.label :company_name %>
               <%= text_field_tag :company_name, nil, class: "form-control form-control-lg" %>

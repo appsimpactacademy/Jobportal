@@ -8,7 +8,7 @@ class AppliedJob < ApplicationRecord
 
   # callbacks
 
-  after_create :notify_employeers_and_job_seekers
+  after_create :notify_employers_and_job_seekers
 
   # class methods
 
@@ -22,7 +22,7 @@ class AppliedJob < ApplicationRecord
 
   private
 
-  def notify_employeers_and_job_seekers
+  def notify_employers_and_job_seekers
     AppliedJobNotificationJob.perform_later(job_seeker, job)
   end
 end

@@ -14,10 +14,10 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :contact_number, presence: true, uniqueness: true
 
-  validate :company_required_if_employeer
+  validate :company_required_if_employer
 
-  def employeer?
-    role == 'employeer'
+  def employer?
+    role == 'employer'
   end
 
   def job_seeker?
@@ -30,8 +30,8 @@ class User < ApplicationRecord
 
   private
 
-  def company_required_if_employeer
-    if employeer? && company.nil?
+  def company_required_if_employer
+    if employer? && company.nil?
       errors.add(:company, "must exist if user is an employer")
     end
   end
