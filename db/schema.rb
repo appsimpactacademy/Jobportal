@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_19_154648) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_10_124032) do
   create_table "applied_jobs", force: :cascade do |t|
     t.integer "job_id", null: false
     t.integer "user_id", null: false

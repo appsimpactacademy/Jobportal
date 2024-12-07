@@ -17,9 +17,9 @@
     website: "https://www.example#{i+1}.com"
   )
 
-  puts "Creating employeer #{i+1}"
-  employeer = User.create(
-    role: 'employeer',
+  puts "Creating employer #{i+1}"
+  employer = User.create(
+    role: '',
     company: company,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -42,18 +42,18 @@
 end
 
 # sample jobs
-User.where(role: 'employeer').each_with_index do |employeer, i|
-  puts "Creating job #{i+1} for #{employeer.company.name}"
+User.where(role: 'employer').each_with_index do |employer, i|
+  puts "Creating job #{i+1} for #{employer.company.name}"
   Job.create(
     title: Faker::Job.title,
     description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
     job_type: ['Contract', 'Fulltime', 'Part time', 'Internship'].sample,
     job_location: ['Remote', 'Onsite'].sample,
-    company_id: employeer.company_id,
-    posted_by_id: employeer.id,
+    company_id: employer.company_id,
+    posted_by_id: employer.id,
     applicable_for: ['Freshers', 'Intermediate', 'Experienced', 'Expert', 'Open for all'].sample,
     salary_range: ['$1000-$2500', '$2500-$5000', '$5000-$10000', '> $10000', 'Hourly'].sample,
-    link_to_apply: "https://#{employeer.company.name.downcase.gsub(' ', '')}.org/careers/",
+    link_to_apply: "https://#{employer.company.name.downcase.gsub(' ', '')}.org/careers/",
     total_positions: rand(1..5)
   )
 end

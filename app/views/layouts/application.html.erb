@@ -15,9 +15,9 @@
     <div class="container">
       <%= render 'shared/flash' %>
       <div class="row">
-        <% if user_signed_in? && current_user.employeer? && !params[:public_view].present? %>
+        <% if user_signed_in? && current_user.employer? && !params[:public_view].present? %>
           <div class="col-lg-3">
-            <%= render 'shared/employeer_sidebar' %>
+            <%= render 'shared/employer_sidebar' %>
           </div>
           <div class="col-lg-9">
             <%= yield %>
